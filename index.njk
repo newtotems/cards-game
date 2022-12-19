@@ -4,11 +4,56 @@ eleventyNavigation:
   key: Home
   order: 1
 ---
-{% set maxPosts = collections.posts.length | min(3) %}
-<h1>Latest {% if maxPosts == 1 %}Post{% else %}{{ maxPosts }} Posts{% endif %}</h1>
 
-{% set postslist = collections.posts | head(-3) %}
-{% set postslistCounter = collections.posts | length %}
-{% include "postslist.njk" %}
 
-<p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
+    <form onsubmit="checkTotalScore()">
+      <label>
+        Enter the ID of card 1:
+        <input type="text" id="cardId1" />
+      </label>
+      <br />
+      <label>
+        Enter the ID of card 2:
+        <input type="text" id="cardId2" />
+      </label>
+      <br />
+      <label>
+        Enter the ID of card 3:
+        <input type="text" id="cardId3" />
+      </label>
+      <br />
+      <label>
+        Enter the ID of card 4:
+        <input type="text" id="cardId4" />
+      </label>
+      <br />
+      <label>
+        Enter the ID of card 5:
+        <input type="text" id="cardId5" />
+      </label>
+      <br />
+      <button type="submit">Check total score</button>
+    </form>
+    <p id="totalScore">0</p>
+    <script>
+      const checkTotalScore = async () => {
+        try {
+          const cardIds = [
+            document.getElementById('cardId1').value,
+            document.getElementById('cardId2').value,
+            document.getElementById('cardId3').value,
+            document.getElementById('cardId4').value,
+            document.getElementById('cardId5').value
+          ].join(',')
+          const response = await fetch(`/.netlify/functions/checktotals?ids=${cardIds}`)
+          if (!response.ok) {
+            throw new Error(`Failed to fetch total score: ${response.statusText}`)
+          }
+          const data = await response.json()
+          document.getElementById('totalScore').innerHTML = `Total score: ${data.totalScore}`
+        } catch (error) {
+          console.error(error)
+          document.getElementById('totalScore').innerHTML = 'An error occurred while fetching the total score'
+        }
+      }
+    </script>
