@@ -1,59 +1,37 @@
 ---
 layout: layouts/home.njk
-eleventyNavigation:
-  key: Home
-  order: 1
 ---
+  <form onsubmit="return submitForm()">
+    <label for="card1">Card 1:</label>
+    <input type="text" id="card1" name="card1"><br>
+    <label for="card2">Card 2:</label>
+    <input type="text" id="card2" name="card2"><br>
+    <label for="card3">Card 3:</label>
+    <input type="text" id="card3" name="card3"><br>
+    <label for="card4">Card 4:</label>
+    <input type="text" id="card4" name="card4"><br>
+    <label for="card5">Card 5:</label>
+    <input type="text" id="card5" name="card5"><br>
+    <input type="submit" value="Submit">
+  </form>
+  <p id="result">0</p>
 
+  <script>
+    function submitForm() {
+  const card1 = document.getElementById('card1').value
+  const card2 = document.getElementById('card2').value
+  const card3 = document.getElementById('card3').value
+  const card4 = document.getElementById('card4').value
+  const card5 = document.getElementById('card5').value
+  const ids = [card1, card2, card3, card4, card5]
 
-    <form onsubmit="checkTotalScore()">
-      <label>
-        Enter the ID of card 1:
-        <input type="text" id="cardId1" />
-      </label>
-      <br />
-      <label>
-        Enter the ID of card 2:
-        <input type="text" id="cardId2" />
-      </label>
-      <br />
-      <label>
-        Enter the ID of card 3:
-        <input type="text" id="cardId3" />
-      </label>
-      <br />
-      <label>
-        Enter the ID of card 4:
-        <input type="text" id="cardId4" />
-      </label>
-      <br />
-      <label>
-        Enter the ID of card 5:
-        <input type="text" id="cardId5" />
-      </label>
-      <br />
-      <button type="submit">Check total score</button>
-    </form>
-    <p id="totalScore">0</p>
-    <script>
-      const checkTotalScore = async () => {
-        try {
-          const cardIds = [
-            document.getElementById('cardId1').value,
-            document.getElementById('cardId2').value,
-            document.getElementById('cardId3').value,
-            document.getElementById('cardId4').value,
-            document.getElementById('cardId5').value
-          ].join(',')
-          const response = await fetch(`/.netlify/functions/checktotals?ids=${cardIds}`)
-          if (!response.ok) {
-            throw new Error(`Failed to fetch total score: ${response.statusText}`)
-          }
-          const data = await response.json()
-          document.getElementById('totalScore').innerHTML = `Total score: ${data.totalScore}`
-        } catch (error) {
-          console.error(error)
-          document.getElementById('totalScore').innerHTML = 'An error occurred while fetching the total score'
-        }
-      }
-    </script>
+  checktotals(ids).then(totalScore => {
+    document.getElementById('result').innerHTML = `Total score: ${totalScore}`
+  }).catch(error => {
+    document.getElementById('result').innerHTML = error.message
+  })
+
+  return false
+}
+  </script>
+  
