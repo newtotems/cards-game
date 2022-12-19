@@ -1,7 +1,7 @@
 const fs = require('fs')
 
-async function checktotals(ids) {
-  try {
+ function checktotals(ids) {
+  
     const cards = JSON.parse(fs.readFileSync('cards.json', 'utf8'))
     let totalScore = 0
 
@@ -23,10 +23,6 @@ async function checktotals(ids) {
       }
     }
     return totalScore
-  } catch (error) {
-    console.error(error)
-    throw error
-  }
 }
 
 const ids = [1, 2, 3, 4, 5]
