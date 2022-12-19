@@ -1,3 +1,4 @@
+const fs = require('fs')
 
 async function checktotals(ids) {
   try {
