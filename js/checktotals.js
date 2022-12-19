@@ -83,7 +83,7 @@ async function checktotals(ids) {
                   "type": "bird",
                   "count": 1
               },
-              "value": 5
+              "value": 0
           }
       ]
   }];
