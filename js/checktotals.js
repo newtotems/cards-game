@@ -1,8 +1,94 @@
-const fs = require('fs')
 
  function checktotals(ids) {
   
-    const cards = JSON.parse(fs.readFileSync('cards.json', 'utf8'))
+    const cards = 
+    
+    [{
+      "id": 1,
+      "name": "flamingo",
+      "type": "bird",
+      "score": 12,
+      "rules": [
+          {
+              "type": "score_increase",
+              "condition": "if_more_than_n_of_type",
+              "condition_value": {
+                  "type": "bird",
+                  "count": 1
+              },
+              "value": 5
+          }
+      ]
+  },
+  {
+          "id": 2,
+          "name": "flamingo",
+          "type": "bird",
+          "score": 12,
+          "rules": [
+              {
+                  "type": "score_increase",
+                  "condition": "if_more_than_n_of_type",
+                  "condition_value": {
+                      "type": "bird",
+                      "count": 1
+                  },
+                  "value": 5
+              }
+          ]
+      },
+  {
+      "id": 3,
+      "name": "flamingo",
+      "type": "bird",
+      "score": 12,
+      "rules": [
+          {
+              "type": "score_increase",
+              "condition": "if_more_than_n_of_type",
+              "condition_value": {
+                  "type": "bird",
+                  "count": 1
+              },
+              "value": 5
+          }
+      ]
+  },
+  {
+      "id": 4,
+      "name": "flamingo",
+      "type": "bird",
+      "score": 12,
+      "rules": [
+          {
+              "type": "score_increase",
+              "condition": "if_more_than_n_of_type",
+              "condition_value": {
+                  "type": "bird",
+                  "count": 1
+              },
+              "value": 5
+          }
+      ]
+  },
+  {
+      "id": 5,
+      "name": "flamingo",
+      "type": "bird",
+      "score": 12,
+      "rules": [
+          {
+              "type": "score_increase",
+              "condition": "if_more_than_n_of_type",
+              "condition_value": {
+                  "type": "bird",
+                  "count": 1
+              },
+              "value": 5
+          }
+      ]
+  }];
+
     let totalScore = 0
 
     for (const id of ids) {
