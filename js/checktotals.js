@@ -1,8 +1,7 @@
 
- function checktotals(ids) {
-  
+async function checktotals(ids) {
+  try {
     const cards = 
-    
     [{
       "id": 1,
       "name": "flamingo",
@@ -88,7 +87,7 @@
           }
       ]
   }];
-
+  
     let totalScore = 0
 
     for (const id of ids) {
@@ -109,6 +108,10 @@
       }
     }
     return totalScore
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
 }
 
 const ids = [1, 2, 3, 4, 5]
